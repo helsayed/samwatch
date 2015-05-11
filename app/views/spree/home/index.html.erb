@@ -1,0 +1,23 @@
+<% content_for :sidebar do %>
+  <div data-hook="homepage_sidebar_navigation">
+    <%= render :partial => 'spree/shared/taxonomies' %>
+  </div>
+<% end %>
+
+<div data-hook="homepage_products">
+	<div id= 'badrSalesmanRecommendation'> </div>
+  <% cache(cache_key_for_products) do %>
+    <%= render :partial => 'spree/shared/products', :locals => { :products => @products } %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $('.purchase-activity').click(function(){
+	    badrSalesman = new BadrSalesmanActivity('order');
+	    badrSalesman.sendActivity()
+	  
+	  });
+	});
+  
+</script>
