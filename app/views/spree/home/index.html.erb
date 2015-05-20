@@ -5,7 +5,10 @@
 <% end %>
 
 <div data-hook="homepage_products">
+	<div id= 'badrSalesman'> 
 	<div id= 'badrSalesmanRecommendation'> </div>
+	<div id= 'badrSalesmanPromotion'> </div>
+	</div>
   <% cache(cache_key_for_products) do %>
     <%= render :partial => 'spree/shared/products', :locals => { :products => @products } %>
   <% end %>

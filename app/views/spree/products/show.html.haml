@@ -7,8 +7,9 @@
 #buy
   %button{onclick: "logBuyActivity()"}buy
   %button{onclick: "logRateActivity()"}rate
-#badrSalesmanRecommendation
-
+#badrSalesman
+  #badrSalesmanRecommendation
+  #badrSalesmanPromotion
 - cache [I18n.locale, current_currency, @product] do
   %div{"data-hook" => "product_show", :itemscope => "", :itemtype => "http://schema.org/Product"}
     .col-md-4{"data-hook" => "product_left_part"}
@@ -16,7 +17,7 @@
         #product-images{"data-hook" => "product_images"}
           #main-image.panel.panel-default{"data-hook" => ""}
             .panel-body.text-center
-              = render :partial => 'image'
+              = image_tag @product.image_url, :itemprop => "image" , width: '240', height: '240'
           #thumbnails{"data-hook" => ""}
             = render :partial => 'thumbnails'
         %div{"data-hook" => "product_properties"}
