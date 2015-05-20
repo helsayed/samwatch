@@ -167,23 +167,22 @@ window.onbeforeunload = function(e){
 	  badrActivity = new BadrSalesmanActivity($('meta[name=activity]').attr('content'));
   	badrActivity.sendActivity();
 
-
-    if ($.cookie("products")){
-      if ($.cookie("products").indexOf($('meta[name=item_id]').attr('content')) < 0){
-        $.cookie("products", $.cookie("products") +','+  $('meta[name=item_id]').attr('content'), {expires: new Date($.cookie("products_expiration"))});
-      }
-    }else{
-      var date = new Date();
-      date.setTime(date.getTime() + (15 * 60 * 1000));
-      $.cookie("products_expiration", date);
-      $.cookie("products", $('meta[name=item_id]').attr('content'), { expires: date});
-    }
-
 	}
 };
 
 $( document ).ready(function(){
 	window.openTime = new Date();
+
+  if ($.cookie("products")){
+    if ($.cookie("products").indexOf($('meta[name=item_id]').attr('content')) < 0){
+      $.cookie("products", $.cookie("products") +','+  $('meta[name=item_id]').attr('content'), {expires: new Date($.cookie("products_expiration"))});
+    }
+  }else{
+    var date = new Date();
+    date.setTime(date.getTime() + (15 * 60 * 1000));
+    $.cookie("products_expiration", date);
+    $.cookie("products", $('meta[name=item_id]').attr('content'), { expires: date});
+  }
 	badrRecommender = new BadrSalesmanRecommender();
   if ($('#badrSalesmanRecommendation').length > 0){
 		badrRecommender.getRecommendations();
