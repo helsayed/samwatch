@@ -1,10 +1,10 @@
-function BadrSalesmanActivity (type){
+function BadrSalesmanActivity (access_token, type){
 	this.type = type;
 	this.item_id = 0;
 	this.item_price = 0;
 	this.rate = 0;
 	this.uId = '0';
-	this.retailerToken = '3bcdd4c1f246282441259116a055906b'
+	this.retailerToken = '2d85c119bb419da6758bd0f8170ed3f5'
 	this.specifyRemoteUrl();
 }
 
@@ -52,12 +52,12 @@ BadrSalesmanActivity.prototype.sendActivity = function(){
 function BadrSalesmanRecommender(){
 	this.item_ids = 0;
 	this.uId = '0';
-	this.retailerToken = '3bcdd4c1f246282441259116a055906b'
+	this.retailerToken = "2d85c119bb419da6758bd0f8170ed3f5"
 }
 
 BadrSalesmanRecommender.prototype.getRecommendations = function(){
 	//TODO change this url to real machine 
-	this.url = 'http://badrsalesman:3000/api/v1/recommendations/get_recommendation';
+	this.url = 'http://salesman.badrit.com/api/v1/recommendations/get_recommendation';
   this.identifyUser();
   if ($('meta[name=item_id]').length > 0 ){
 		recommendation_item_data = {
@@ -72,7 +72,7 @@ BadrSalesmanRecommender.prototype.getRecommendations = function(){
     url: this.url ,
     data:{
       access_token: this.retailerToken,
-      recommendation_data:{recommendation_item_data},
+      recommendation_data:{recommendation_item_data: recommendation_item_data},
     	user_data: {
       	user_cookie_id: this.uId,
     	}
@@ -100,7 +100,7 @@ BadrSalesmanRecommender.prototype.identifyUser = function(){
 
 BadrSalesmanRecommender.prototype.getPromotions = function(){
   //TODO change this url to real machine 
-  this.url = 'http://badrsalesman:3000/api/v1/promotions/get_promotions';
+  this.url = 'http://salesman.badrit.com/api/v1/promotions/get_promotions';
   this.identifyUser();
   $.ajax({
     type: 'GET',
@@ -136,7 +136,7 @@ function promotionsJsonParser(promotionJson){
   if (promotionJson['Offers'].length > 0){
     $('#badrSalesmanPromotion').append("<h4>Promoted Products</h4>");
     $.each(promotionJson["Offers"], function(index, value){
-      $('#badrSalesmanPromotion').append("<div id='promoted_product' style='margin-bottom: 5px;width:150px; height:155px; float: left; margin-right: 10px; border: 1px solid gray; padding: 6px;'><a href=" + value['url']+ "> <div style = 'height:60px'><img width= '90' style=' max-width:70px; margin-left: 24px;' src=" + value['image'] + "></div><label style='text-align: center;'>" + value['title'] + "</label></br><label><strike style='color: red;'>"+round(value['originalPrice'], 2)+"</strike>&nbsp;"+round(value['discountedPrice'], 2)+"</label></a></div>");
+      $('#badrSalesmanPromotion').append("<div id='promoted_product' style='margin-bottom: 5px;width:150px; height:155px; float: left; margin-right: 10px; border: 1px solid gray; padding: 6px;'><a href=" + value['url']+ "> <div style = 'height:60px'><img style='width:135px;height:90px;' src=" + value['image'] + "></div><label style='text-align: center;margin-top: 30px;text-overflow: ellipsis;width: 150px;overflow: hidden;white-space: nowrap;'>" + value['title'] + "</label></br><label><strike style='color: red;'>"+round(value['originalPrice'], 2)+"</strike>&nbsp;"+round(value['discountedPrice'], 2)+"</label></a></div>");
     });
     $('#badrSalesmanPromotion').attr('style',"border: 1px solid #BFBFBF; display: inline-block; padding: 14px;border-radius: 5px;margin-bottom: 5px;  width: 31%;");
   }
@@ -149,9 +149,9 @@ function recommendationJsonParser(recommendationJson){
     $('#badrSalesmanRecommendation').append("<h4>Recommended Products for you </h4>");
 
     $.each(recommendationJson["Recommendations"], function(index, value){
-  		$('#badrSalesmanRecommendation').append("<div id='recommended_product' style='margin-bottom: 5px;width:150px; height:120px; float: left; margin-right: 10px; border: 1px solid gray; padding: 6px;'><a href=" + value[1]['url']+ ">	<div style = 'height:60px'><img width= '90' style=' max-width:70px; margin-left: 24px;' src=" + value[1]['image'] + "></div><label style='text-align: center;'>" + value[1]['title'] + "</label></a></div>");
+  		$('#badrSalesmanRecommendation').append("<div id='recommended_product' style='margin-bottom: 5px;width:150px; height:120px; float: left; margin-right: 10px; border: 1px solid gray; padding: 6px;'><a href=" + value[1]['url']+ ">	<div style = 'height:60px'><img style='width:135px;height:90px;' src=" + value[1]['image'] + "></div><label style='text-align: center;margin-top: 30px;text-overflow: ellipsis;width: 150px;overflow: hidden;white-space: nowrap;'>" + value[1]['title'] + "</label></a></div>");
   	});
-    $('#badrSalesmanRecommendation').attr('style',"border: 1px solid #BFBFBF; display: inline-block; padding: 14px;border-radius: 5px;margin-bottom: 5px;  width: 65%;");
+    $('#badrSalesmanRecommendation').attr('style',"border: 1px solid #BFBFBF; display: inline-block; padding: 14px;border-radius: 5px;margin-bottom: 5px;  width: 101%;");
   }
 	
 }

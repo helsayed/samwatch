@@ -2,6 +2,9 @@
 <title><%= title %></title>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<% if current_spree_user %>
+  <meta name="user_id" content="<%= current_spree_user.id %>">
+<% end %>
 <%== meta_data_tags %>
 <%= canonical_tag(current_store.url) %>
 <%= favicon_link_tag 'favicon.ico' %>

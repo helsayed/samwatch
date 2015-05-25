@@ -4,9 +4,6 @@
 %meta{name: "activity", content: 'view'}
 .rate{data:'5'}
 - @body_id = 'product-details'
-#buy
-  %button{onclick: "logBuyActivity()"}buy
-  %button{onclick: "logRateActivity()"}rate
 #badrSalesman
   #badrSalesmanRecommendation
   #badrSalesmanPromotion
@@ -32,6 +29,13 @@
             = product_description(@product) rescue Spree.t(:product_has_no_description)
           #cart-form{"data-hook" => "cart_form"}
             = render :partial => 'cart_form'
+          #buy{style: "margin-top: 10px;margin-bottom: 10px;"}
+            %a.btn.btn-success{href: "#", onclick: "logBuyActivity()"}
+              %span.glyphicon.glyphicon-usd
+              Buy
+            %a.btn.btn-success{href: "#", onclick: "logRateActivity()"}
+              %span.glyphicon.glyphicon-thumbs-up
+              Like
         = render :partial => 'taxons'
 :javascript
   function logBuyActivity(){
@@ -40,7 +44,7 @@
   }
 
   function logRateActivity(){
-    badrSalesman = new BadrSalesmanActivity('order');
+    badrSalesman = new BadrSalesmanActivity('rate');
     badrSalesman.sendActivity()
   }
 
