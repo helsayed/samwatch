@@ -3,24 +3,29 @@ function BadrSalesmanActivity (access_token, type){
 	this.item_id = 0;
 	this.item_price = 0;
 	this.rate = 0;
-	this.uId = '0';
-	this.retailerToken = '2d85c119bb419da6758bd0f8170ed3f5'
+  this.cookieUserId = '0';
+	this.userId = '0';
+	this.retailerToken = '55b21feecb7562083395d320b226f77f'
 	this.specifyRemoteUrl();
 }
 
 BadrSalesmanActivity.prototype.identifyUser = function(){
 	  if ($.cookie("user_identity")){
-      userId = $.cookie("user_identity");
+      cUserId = $.cookie("user_identity");
     }else{
-      userId = Math.round(new Date().getTime() + (Math.random() * 100));
-      $.cookie("user_identity", userId);
+      cUserId = Math.round(new Date().getTime() + (Math.random() * 100));
+      $.cookie("user_identity", cUserId);
     }
-    this.uId = userId;
+    this.cookieUserId = cUserId;
+    if ($('meta[name=user_id]').length > 0 ){
+      this.userId = $('meta[name=user_id]').attr('content')
+    }
+
 }
 
 BadrSalesmanActivity.prototype.specifyRemoteUrl = function(){
 		//TODO change this url to real machine 
-	this.url = 'http://badrsalesman:3000/api/v1/activities/log_activity';
+	this.url = 'http://salesman.badrit.com/api/v1/activities/log_activity';
 };
 
 BadrSalesmanActivity.prototype.sendActivity = function(){
@@ -38,7 +43,8 @@ BadrSalesmanActivity.prototype.sendActivity = function(){
         session_time: window.timeDiff/100  //time in seconds
       },
     	user_data: {
-      	user_cookie_id: this.uId,
+      	user_cookie_id: this.cookieUserId,
+        user_forign_id: this.userId
     	}
     },
     crossDomain: true,
@@ -51,8 +57,9 @@ BadrSalesmanActivity.prototype.sendActivity = function(){
 
 function BadrSalesmanRecommender(){
 	this.item_ids = 0;
-	this.uId = '0';
-	this.retailerToken = "2d85c119bb419da6758bd0f8170ed3f5"
+	this.cookieUserId = '0';
+  this.userId = '0';
+  this.retailerToken = "55b21feecb7562083395d320b226f77f"
 }
 
 BadrSalesmanRecommender.prototype.getRecommendations = function(){
@@ -74,7 +81,8 @@ BadrSalesmanRecommender.prototype.getRecommendations = function(){
       access_token: this.retailerToken,
       recommendation_data:{recommendation_item_data: recommendation_item_data},
     	user_data: {
-      	user_cookie_id: this.uId,
+      	user_cookie_id: this.cookieUserId,
+        user_forign_id: this.userId
     	}
     },
     crossDomain: true,
@@ -88,12 +96,16 @@ BadrSalesmanRecommender.prototype.getRecommendations = function(){
 //ToDo remove redunduncy 
 BadrSalesmanRecommender.prototype.identifyUser = function(){
 	  if ($.cookie("user_identity")){
-      userId = $.cookie("user_identity");
+      cUserId = $.cookie("user_identity");
     }else{
-      userId = Math.round(new Date().getTime() + (Math.random() * 100));
+      cUserId = Math.round(new Date().getTime() + (Math.random() * 100));
       $.cookie("user_identity", userId);
     }
-    this.uId = userId;
+    this.cookieUserId = cUserId;
+    if ($('meta[name=user_id]').length > 0 ){
+      this.userId = $('meta[name=user_id]').attr('content')
+    }
+
 }
 
 
@@ -108,7 +120,8 @@ BadrSalesmanRecommender.prototype.getPromotions = function(){
     data:{
       access_token: this.retailerToken,
       user_data: {
-        user_cookie_id: this.uId,
+        user_cookie_id: this.cookieUserId,
+        user_forign_id: this.userId
       }
     },
     crossDomain: true,
@@ -122,12 +135,16 @@ BadrSalesmanRecommender.prototype.getPromotions = function(){
 //ToDo remove redunduncy 
 BadrSalesmanRecommender.prototype.identifyUser = function(){
     if ($.cookie("user_identity")){
-      userId = $.cookie("user_identity");
+      cUserId = $.cookie("user_identity");
     }else{
-      userId = Math.round(new Date().getTime() + (Math.random() * 100));
-      $.cookie("user_identity", userId);
+      cUserId = Math.round(new Date().getTime() + (Math.random() * 100));
+      $.cookie("user_identity", cUserId);
     }
-    this.uId = userId;
+    this.cookieUserId = cUserId;
+    if ($('meta[name=user_id]').length > 0 ){
+      this.userId = $('meta[name=user_id]').attr('content')
+    }
+
 }
 
 
