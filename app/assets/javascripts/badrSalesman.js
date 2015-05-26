@@ -1,4 +1,4 @@
-function BadrSalesmanActivity (access_token, type){
+function BadrSalesmanActivity (type){
 	this.type = type;
 	this.item_id = 0;
 	this.item_price = 0;
