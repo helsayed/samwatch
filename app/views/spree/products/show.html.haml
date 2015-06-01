@@ -39,12 +39,10 @@
         = render :partial => 'taxons'
 :javascript
   function logBuyActivity(){
-    badrSalesman = new BadrSalesmanActivity('order');
-    badrSalesman.sendActivity()
+    badrRecommender.sendActivity('order')
   }
 
   function logRateActivity(){
-    badrSalesman = new BadrSalesmanActivity('rate');
-    badrSalesman.sendActivity()
+    badrRecommender.sendActivity('rate')
   }
 
