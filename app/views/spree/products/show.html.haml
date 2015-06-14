@@ -14,7 +14,7 @@
         #product-images{"data-hook" => "product_images"}
           #main-image.panel.panel-default{"data-hook" => ""}
             .panel-body.text-center
-              = image_tag @product.image_url, :itemprop => "image" , width: '240', height: '240'
+              = product_image(@product, :itemprop => "image")
           #thumbnails{"data-hook" => ""}
             = render :partial => 'thumbnails'
         %div{"data-hook" => "product_properties"}
